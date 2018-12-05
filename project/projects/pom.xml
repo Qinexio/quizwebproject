@@ -12,5 +12,7 @@
    </parent>
    <modules>
       <module>logging</module>
+      <module>dbconn</module>
+      <module>dao</module>
    </modules>
 </project>
