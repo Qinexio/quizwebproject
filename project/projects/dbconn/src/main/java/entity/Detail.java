@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -21,7 +22,8 @@ public class Detail implements Serializable {
 	private static final long serialVersionUID = -6013286209964435897L;
 
 	@Id
-	@GeneratedValue
+	@SequenceGenerator(name="seqGenDetail", sequenceName = "testDetail_detID_seq", initialValue=1, allocationSize=3)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqGenDetail")
 	@Column(name = "detID")
 	private int id;
 

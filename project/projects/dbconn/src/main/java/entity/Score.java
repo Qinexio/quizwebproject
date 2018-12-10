@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -22,9 +23,9 @@ public class Score implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 8778596812815454452L;
-
 	@Id
-	@GeneratedValue
+	@SequenceGenerator(name="seqGenScore", sequenceName = "userScore_scoreID_seq", initialValue=1, allocationSize=3)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqGenScore")
 	@Column(name = "scoreID")
 	private long id;
 
@@ -45,7 +46,7 @@ public class Score implements Serializable {
 		}
 
 	
-	public Score(int id, Double score, User scoreUser, Quiz scoreQuiz) {
+	public Score(long id, Double score, User scoreUser, Quiz scoreQuiz) {
 		super();
 		this.id = id;
 		this.score = score;
@@ -54,7 +55,7 @@ public class Score implements Serializable {
 	}
 
 
-	public Score(int id, Double score) {
+	public Score(long id, Double score) {
 		super();
 		this.id = id;
 		this.score = score;

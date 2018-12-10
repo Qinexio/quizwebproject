@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -21,14 +22,15 @@ public class Profile implements Serializable {
 	private static final long serialVersionUID = -3088271801332671258L;
 
 	@Id
-	@GeneratedValue
+	@SequenceGenerator(name="seqGenProfile", sequenceName = "userProfile_extID_seq", initialValue=1, allocationSize=3)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqGenProfile")
 	@Column(name = "extID")
 	private int id;
 
 	@Column(name = "extDescription")
 	private String profileDescription;
 
-	@Column(name = "extImage")
+	@Column(name = "extImage", unique = true)
 	private String profileImageLocation;
 
 	@Column(name = "extImageExtension")

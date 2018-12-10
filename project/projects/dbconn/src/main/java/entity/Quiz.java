@@ -12,7 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "testBase")
@@ -24,7 +28,8 @@ public class Quiz implements Serializable {
 	private static final long serialVersionUID = 799815714173249899L;
 
 	@Id
-	@GeneratedValue
+	@SequenceGenerator(name="seqGenQuiz", sequenceName = "testBase_testID_seq", initialValue=1, allocationSize=3)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqGenQuiz")
 	@Column(name = "testID")
 	private int id;
 
@@ -34,18 +39,23 @@ public class Quiz implements Serializable {
 	@Column(name = "testDescription")
 	private String quizDescription;
 
+	@Column(unique = true)
 	@OneToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "userIDfk", referencedColumnName = "userID")
 	private Profile quizUser;
 	
+	@Column(unique = true)
 	@OneToOne(optional = false, fetch = FetchType.LAZY)
+	@Cascade(value= CascadeType.ALL)
 	@JoinColumn(name = "detIDfk", referencedColumnName = "detID")
 	private Detail quizDetail;
 
 	@OneToMany(mappedBy = "scoreQuiz", fetch = FetchType.LAZY)
+	@Cascade(value= CascadeType.ALL)
 	private List<Score> quizScores;
 	
 	@OneToMany(mappedBy = "questionQuiz", fetch = FetchType.LAZY)
+	@Cascade(value= CascadeType.ALL)
 	private List<Question> quizQuestions;
 	
 	public Quiz()

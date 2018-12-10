@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -20,9 +21,10 @@ public class Answer implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -917546024071036747L;
-
+	//might have to raise allocation size to improve performance, even though more gaps will appear
 	@Id
-	@GeneratedValue
+	@SequenceGenerator(name="seqGenAnswer", sequenceName = "testAnswer_answerID_seq", initialValue=1, allocationSize=3)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqGenAnswer")
 	@Column(name = "answerID")
 	private long id;
 
@@ -32,6 +34,7 @@ public class Answer implements Serializable {
 	@Column(name = "answerIsCorrect")
 	private boolean answerIsCorrect;
 
+	//there might be an issue with foreign key indexes and hibernate, as they might not make use of it or conflict(or just straight up create a relationship table instead)
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "questionIDfk",  referencedColumnName = "questionID")
     private Question answerQuestion;

@@ -12,7 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "userBase")
@@ -24,39 +28,42 @@ public class User implements Serializable {
 	private static final long serialVersionUID = -7892418481913055870L;
 
 	@Id
-	@GeneratedValue
+	@SequenceGenerator(name = "seqGenUser", sequenceName = "userBase_userID_seq", initialValue = 1, allocationSize = 3)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGenUser")
 	@Column(name = "userID")
 	private int id;
 
-	@Column(name = "userName")
+	@Column(name = "userName", unique = true)
 	private String userName;
 
-	@Column(name = "userMail")
+	@Column(name = "userMail", unique = true)
 	private String userMail;
 
-	@Column(name = "userConfirmation")
+	@Column(name = "userConfirmation", unique = true)
 	private String userConfirmation;
-	
+
 	@Column(name = "userIsVerified")
 	private boolean userIsVerified;
-	
+
+	@Column(unique = true)
 	@OneToOne(optional = false, fetch = FetchType.LAZY)
+	@Cascade(value = CascadeType.ALL)
 	@JoinColumn(name = "extIDfk", referencedColumnName = "extID")
 	private Profile userProfile;
-	
+
+	@Column(unique = true)
 	@OneToOne(optional = false, fetch = FetchType.LAZY)
+	@Cascade(value = CascadeType.ALL)
 	@JoinColumn(name = "credIDfk", referencedColumnName = "credID")
 	private Credidential userCreds;
-	
-	@OneToMany(mappedBy = "scoreUser", fetch = FetchType.LAZY)
-	private List<Score> userScores;
-	
-	public User()
-	{
 
-		}
-	
-	
+	@OneToMany(mappedBy = "scoreUser", fetch = FetchType.LAZY)
+	@Cascade(value = CascadeType.ALL)
+	private List<Score> userScores;
+
+	public User() {
+
+	}
 
 	public User(int id, String userName, String userMail, String userConfirmation, boolean userIsVerified,
 			Profile userProfile, Credidential userCreds, List<Score> userScores) {
@@ -71,8 +78,6 @@ public class User implements Serializable {
 		this.userScores = userScores;
 	}
 
-	
-
 	public User(int id, String userName, String userMail, String userConfirmation, boolean userIsVerified) {
 		super();
 		this.id = id;
@@ -82,15 +87,11 @@ public class User implements Serializable {
 		this.userIsVerified = userIsVerified;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", userName=" + userName + ", userMail=" + userMail + ", userConfirmation="
 				+ userConfirmation + ", userIsVerified=" + userIsVerified + "]";
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -99,8 +100,6 @@ public class User implements Serializable {
 		result = prime * result + id;
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -115,8 +114,6 @@ public class User implements Serializable {
 			return false;
 		return true;
 	}
-
-
 
 	public int getId() {
 		return id;
@@ -185,7 +182,5 @@ public class User implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	};
-
-	
 
 }

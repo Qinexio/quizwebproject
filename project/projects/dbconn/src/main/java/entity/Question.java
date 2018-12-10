@@ -12,7 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "testQuestion")
@@ -24,7 +28,8 @@ public class Question implements Serializable {
 	private static final long serialVersionUID = -5776437534614436755L;
 
 	@Id
-	@GeneratedValue
+	@SequenceGenerator(name="seqGenQuestion", sequenceName = "testQuestion_questionID_seq", initialValue=1, allocationSize=3)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqGenQuestion")
 	@Column(name = "questionID")
 	private long id;
 
@@ -39,6 +44,7 @@ public class Question implements Serializable {
     private Quiz questionQuiz;
 	
 	@OneToMany(mappedBy = "answerQuestion")
+	@Cascade(value= CascadeType.ALL)
 	private List<Answer> questionAnswers;
 
 	public Question()

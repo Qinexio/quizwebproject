@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -21,7 +22,8 @@ public class Credidential implements Serializable {
 	private static final long serialVersionUID = 4601039778689536689L;
 
 	@Id
-	@GeneratedValue
+	@SequenceGenerator(name="seqGenCredidential", sequenceName = "userCredidentials_credID_seq", initialValue=1, allocationSize=3)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqGenCredidential")
 	@Column(name = "credID")
 	private int id;
 
