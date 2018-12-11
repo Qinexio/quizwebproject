@@ -45,9 +45,8 @@ public class Answer implements Serializable {
 		}
 
 	
-	public Answer(long id, String answerDescription, boolean answerIsCorrect) {
+	public Answer(String answerDescription, boolean answerIsCorrect) {
 		super();
-		this.id = id;
 		this.answerDescription = answerDescription;
 		this.answerIsCorrect = answerIsCorrect;
 	}

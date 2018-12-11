@@ -43,9 +43,8 @@ public class Profile implements Serializable {
 
 	}
 
-	public Profile(int id, String profileDescription, String profileImageLocation, String profileImageExtension) {
+	public Profile(String profileDescription, String profileImageLocation, String profileImageExtension) {
 		super();
-		this.id = id;
 		this.profileDescription = profileDescription;
 		this.profileImageLocation = profileImageLocation;
 		this.profileImageExtension = profileImageExtension;

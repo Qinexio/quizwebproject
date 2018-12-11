@@ -12,15 +12,15 @@ public class ProfileDAO extends AbstractDAO implements IDao<Profile, Integer> {
 
 	@Override
 	public List<Profile> findAllEntities() {
-		List<Profile> Profiles = (List<Profile>) sessionUT.getSession().createQuery("from Profile").list();
-		return Profiles;
+		List<Profile> entities = (List<Profile>) sessionUT.getSession().createQuery("from Profile").list();
+		return entities;
 
 	}
 
 	@Override
 	public Profile findEntity(Integer id) {
-		Profile book = (Profile) sessionUT.getSession().get(Profile.class, id);
-		return book;
+		Profile entity = (Profile) sessionUT.getSession().get(Profile.class, id);
+		return entity;
 
 	}
 

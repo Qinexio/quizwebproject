@@ -12,15 +12,15 @@ public class QuizDAO extends AbstractDAO implements IDao<Quiz, Integer> {
 
 	@Override
 	public List<Quiz> findAllEntities() {
-		List<Quiz> Quizs = (List<Quiz>) sessionUT.getSession().createQuery("from Quiz").list();
-		return Quizs;
+		List<Quiz> entities = (List<Quiz>) sessionUT.getSession().createQuery("from Quiz").list();
+		return entities;
 
 	}
 
 	@Override
 	public Quiz findEntity(Integer id) {
-		Quiz book = (Quiz) sessionUT.getSession().get(Quiz.class, id);
-		return book;
+		Quiz entity = (Quiz) sessionUT.getSession().get(Quiz.class, id);
+		return entity;
 
 	}
 

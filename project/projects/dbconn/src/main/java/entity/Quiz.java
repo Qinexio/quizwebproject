@@ -28,8 +28,8 @@ public class Quiz implements Serializable {
 	private static final long serialVersionUID = 799815714173249899L;
 
 	@Id
-	@SequenceGenerator(name="seqGenQuiz", sequenceName = "testBase_testID_seq", initialValue=1, allocationSize=3)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqGenQuiz")
+	@SequenceGenerator(name = "seqGenQuiz", sequenceName = "testBase_testID_seq", initialValue = 1, allocationSize = 3)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGenQuiz")
 	@Column(name = "testID")
 	private int id;
 
@@ -39,54 +39,51 @@ public class Quiz implements Serializable {
 	@Column(name = "testDescription")
 	private String quizDescription;
 
+	@Column(name = "testValidation")
+	private boolean quizValidation;
+
 	@Column(unique = true)
 	@OneToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "userIDfk", referencedColumnName = "userID")
 	private Profile quizUser;
-	
+
 	@Column(unique = true)
-	@OneToOne(optional = false, fetch = FetchType.LAZY)
-	@Cascade(value= CascadeType.ALL)
+	@OneToOne(optional = false, fetch = FetchType.LAZY, orphanRemoval=true)
+	@Cascade(value = CascadeType.ALL)
 	@JoinColumn(name = "detIDfk", referencedColumnName = "detID")
 	private Detail quizDetail;
 
-	@OneToMany(mappedBy = "scoreQuiz", fetch = FetchType.LAZY)
-	@Cascade(value= CascadeType.ALL)
+	@OneToMany(mappedBy = "scoreQuiz", fetch = FetchType.LAZY, orphanRemoval=true)
+	@Cascade(value = CascadeType.ALL)
 	private List<Score> quizScores;
-	
-	@OneToMany(mappedBy = "questionQuiz", fetch = FetchType.LAZY)
-	@Cascade(value= CascadeType.ALL)
+
+	@OneToMany(mappedBy = "questionQuiz", fetch = FetchType.LAZY, orphanRemoval=true)
+	@Cascade(value = CascadeType.ALL)
 	private List<Question> quizQuestions;
-	
-	public Quiz()
-	{
 
-		}
+	public Quiz() {
 
-	
-	
-	public Quiz(int id, String quizName, String quizDescription, Profile quizUser, Detail quizDetail,
-			List<Score> quizScores, List<Question> quizQuestions) {
+	}
+
+	public Quiz(int id, String quizName, String quizDescription, boolean quizValidation, Profile quizUser,
+			Detail quizDetail, List<Score> quizScores, List<Question> quizQuestions) {
 		super();
 		this.id = id;
 		this.quizName = quizName;
 		this.quizDescription = quizDescription;
+		this.quizValidation = quizValidation;
 		this.quizUser = quizUser;
 		this.quizDetail = quizDetail;
 		this.quizScores = quizScores;
 		this.quizQuestions = quizQuestions;
 	}
 
-
-
-	public Quiz(int id, String quizName, String quizDescription) {
+	public Quiz(String quizName, String quizDescription, boolean quizValidation) {
 		super();
-		this.id = id;
+		this.quizValidation = quizValidation;
 		this.quizName = quizName;
 		this.quizDescription = quizDescription;
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -95,7 +92,6 @@ public class Quiz implements Serializable {
 		result = prime * result + id;
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -110,14 +106,11 @@ public class Quiz implements Serializable {
 			return false;
 		return true;
 	}
-	
-
 
 	@Override
 	public String toString() {
 		return "Quiz [id=" + id + ", quizName=" + quizName + ", quizDescription=" + quizDescription + "]";
 	}
-
 
 	public int getId() {
 		return id;
@@ -177,7 +170,15 @@ public class Quiz implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public boolean getValidation() {
+		return quizValidation;
+	}
+
+	public void setValidation(boolean b) {
+		// TODO Auto-generated method stub
+
 	};
 
-	
 }

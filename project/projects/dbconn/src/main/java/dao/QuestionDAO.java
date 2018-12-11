@@ -12,15 +12,15 @@ public class QuestionDAO extends AbstractDAO implements IDao<Question, Long> {
 
 	@Override
 	public List<Question> findAllEntities() {
-		List<Question> Questions = (List<Question>) sessionUT.getSession().createQuery("from Question").list();
-		return Questions;
+		List<Question> entities = (List<Question>) sessionUT.getSession().createQuery("from Question").list();
+		return entities;
 
 	}
 
 	@Override
 	public Question findEntity(Long id) {
-		Question book = (Question) sessionUT.getSession().get(Question.class, id);
-		return book;
+		Question entity = (Question) sessionUT.getSession().get(Question.class, id);
+		return entity;
 
 	}
 

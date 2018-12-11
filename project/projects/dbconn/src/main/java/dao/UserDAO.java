@@ -12,15 +12,15 @@ public class UserDAO extends AbstractDAO implements IDao<User, Integer> {
 
 	@Override
 	public List<User> findAllEntities() {
-		List<User> answers = (List<User>) sessionUT.getSession().createQuery("from User").list();
-		return answers;
+		List<User> entities = (List<User>) sessionUT.getSession().createQuery("from User").list();
+		return entities;
 
 	}
 
 	@Override
 	public User findEntity(Integer id) {
-		User book = (User) sessionUT.getSession().get(User.class, id);
-		return book;
+		User entity = (User) sessionUT.getSession().get(User.class, id);
+		return entity;
 
 	}
 

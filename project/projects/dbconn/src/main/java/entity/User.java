@@ -46,18 +46,18 @@ public class User implements Serializable {
 	private boolean userIsVerified;
 
 	@Column(unique = true)
-	@OneToOne(optional = false, fetch = FetchType.LAZY)
+	@OneToOne(optional = false, fetch = FetchType.LAZY,orphanRemoval=true)
 	@Cascade(value = CascadeType.ALL)
 	@JoinColumn(name = "extIDfk", referencedColumnName = "extID")
 	private Profile userProfile;
 
 	@Column(unique = true)
-	@OneToOne(optional = false, fetch = FetchType.LAZY)
+	@OneToOne(optional = false, fetch = FetchType.LAZY, orphanRemoval=true)
 	@Cascade(value = CascadeType.ALL)
 	@JoinColumn(name = "credIDfk", referencedColumnName = "credID")
 	private Credidential userCreds;
 
-	@OneToMany(mappedBy = "scoreUser", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "scoreUser", fetch = FetchType.LAZY, orphanRemoval=true)
 	@Cascade(value = CascadeType.ALL)
 	private List<Score> userScores;
 
@@ -78,9 +78,8 @@ public class User implements Serializable {
 		this.userScores = userScores;
 	}
 
-	public User(int id, String userName, String userMail, String userConfirmation, boolean userIsVerified) {
+	public User(String userName, String userMail, String userConfirmation, boolean userIsVerified) {
 		super();
-		this.id = id;
 		this.userName = userName;
 		this.userMail = userMail;
 		this.userConfirmation = userConfirmation;

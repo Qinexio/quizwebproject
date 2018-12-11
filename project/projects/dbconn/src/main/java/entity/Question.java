@@ -43,7 +43,7 @@ public class Question implements Serializable {
 	@JoinColumn(name = "testIDfk",  referencedColumnName = "testID")
     private Quiz questionQuiz;
 	
-	@OneToMany(mappedBy = "answerQuestion")
+	@OneToMany(mappedBy = "answerQuestion", orphanRemoval=true)
 	@Cascade(value= CascadeType.ALL)
 	private List<Answer> questionAnswers;
 
@@ -52,9 +52,8 @@ public class Question implements Serializable {
 
 		}
 	
-	public Question(long id, String questionDescription, double questionScore) {
+	public Question(String questionDescription, double questionScore) {
 		super();
-		this.id = id;
 		this.questionDescription = questionDescription;
 		this.questionScore = questionScore;
 	}

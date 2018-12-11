@@ -50,9 +50,8 @@ public class Detail implements Serializable {
 
 	
 	
-	public Detail(int id, int detailQuestionLimit, int detailAnswerLimit, boolean detailIsMercy, int detailTime) {
+	public Detail(int detailQuestionLimit, int detailAnswerLimit, boolean detailIsMercy, int detailTime) {
 		super();
-		this.id = id;
 		this.detailQuestionLimit = detailQuestionLimit;
 		this.detailAnswerLimit = detailAnswerLimit;
 		this.detailIsMercy = detailIsMercy;

@@ -12,15 +12,15 @@ public class DetailDAO extends AbstractDAO implements IDao<Detail, Integer> {
 
 	@Override
 	public List<Detail> findAllEntities() {
-		List<Detail> Details = (List<Detail>) sessionUT.getSession().createQuery("from Detail").list();
-		return Details;
+		List<Detail> entities = (List<Detail>) sessionUT.getSession().createQuery("from Detail").list();
+		return entities;
 
 	}
 
 	@Override
 	public Detail findEntity(Integer id) {
-		Detail book = (Detail) sessionUT.getSession().get(Detail.class, id);
-		return book;
+		Detail entity = (Detail) sessionUT.getSession().get(Detail.class, id);
+		return entity;
 
 	}
 

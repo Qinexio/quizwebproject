@@ -12,15 +12,15 @@ public class AnswerDAO extends AbstractDAO implements IDao<Answer, Long> {
 
 	@Override
 	public List<Answer> findAllEntities() {
-		List<Answer> answers = (List<Answer>) sessionUT.getSession().createQuery("from Answer").list();
-		return answers;
+		List<Answer> entities = (List<Answer>) sessionUT.getSession().createQuery("from Answer").list();
+		return entities;
 
 	}
 
 	@Override
 	public Answer findEntity(Long id) {
-		Answer book = (Answer) sessionUT.getSession().get(Answer.class, id);
-		return book;
+		Answer entity = (Answer) sessionUT.getSession().get(Answer.class, id);
+		return entity;
 
 	}
 

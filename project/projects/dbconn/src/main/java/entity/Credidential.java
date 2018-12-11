@@ -40,9 +40,8 @@ public class Credidential implements Serializable {
 
 	}
 
-	public Credidential(int id, String credPassword, String credSalt) {
+	public Credidential(String credPassword, String credSalt) {
 		super();
-		this.id = id;
 		this.credPassword = credPassword;
 		this.credSalt = credSalt;
 	}

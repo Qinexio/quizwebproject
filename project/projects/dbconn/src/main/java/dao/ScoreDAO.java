@@ -12,15 +12,15 @@ public class ScoreDAO extends AbstractDAO implements IDao<Score, Long> {
 
 	@Override
 	public List<Score> findAllEntities() {
-		List<Score> Scores = (List<Score>) sessionUT.getSession().createQuery("from Score").list();
-		return Scores;
+		List<Score> entities = (List<Score>) sessionUT.getSession().createQuery("from Score").list();
+		return entities;
 
 	}
 
 	@Override
 	public Score findEntity(Long id) {
-		Score book = (Score) sessionUT.getSession().get(Score.class, id);
-		return book;
+		Score entity = (Score) sessionUT.getSession().get(Score.class, id);
+		return entity;
 
 	}
 

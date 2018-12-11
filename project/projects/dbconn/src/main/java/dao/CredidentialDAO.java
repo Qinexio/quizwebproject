@@ -12,16 +12,16 @@ public class CredidentialDAO extends AbstractDAO implements IDao<Credidential, I
 
 	@Override
 	public List<Credidential> findAllEntities() {
-		List<Credidential> Credidentials = (List<Credidential>) sessionUT.getSession().createQuery("from Credidential")
+		List<Credidential> entities = (List<Credidential>) sessionUT.getSession().createQuery("from Credidential")
 				.list();
-		return Credidentials;
+		return entities;
 
 	}
 
 	@Override
 	public Credidential findEntity(Integer id) {
-		Credidential book = (Credidential) sessionUT.getSession().get(Credidential.class, id);
-		return book;
+		Credidential entity = (Credidential) sessionUT.getSession().get(Credidential.class, id);
+		return entity;
 
 	}
 

@@ -6,6 +6,11 @@ abstract class AbstractDAO {
 
 	protected SessionUtility sessionUT;
 
+	public AbstractDAO()
+	{
+		sessionUT = new SessionUtility();
+	}
+	
 	public SessionUtility getSessionUT() {
 		return sessionUT;
 	}

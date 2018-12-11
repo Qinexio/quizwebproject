@@ -46,9 +46,8 @@ public class Score implements Serializable {
 		}
 
 	
-	public Score(long id, Double score, User scoreUser, Quiz scoreQuiz) {
+	public Score(Double score, User scoreUser, Quiz scoreQuiz) {
 		super();
-		this.id = id;
 		this.score = score;
 		this.scoreUser = scoreUser;
 		this.scoreQuiz = scoreQuiz;
